@@ -1,0 +1,13 @@
+# UNVERIFIED: written without a running Docker daemon.
+# `docker compose up --build` then open http://localhost:5173
+services:
+  api:
+    build: .
+    ports: ["8080:8080"]
+    environment:
+      ALLOWED_ORIGIN: http://localhost:5173
+      SEED_DEMO: "true"
+  web:
+    build: ./frontend
+    ports: ["5173:80"]
+    depends_on: [api]
